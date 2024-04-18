@@ -1,0 +1,11 @@
+<h1>My Card List</h1>
+
+
+
+<div id="cards">
+  <% @cards.each do |card| %>
+    <%= render card %>
+  <% end %>
+</div>
+
+<%= link_to "New card", new_card_path, class:"btn btn-outline-success" %>

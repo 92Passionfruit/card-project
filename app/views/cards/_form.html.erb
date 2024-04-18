@@ -1,0 +1,41 @@
+<%= form_with(model: card) do |form| %>
+  <% if card.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(card.errors.count, "error") %> prohibited this card from being saved:</h2>
+
+      <ul>
+        <% card.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field mb-3">
+    <%= form.label :card_name, style: "display: block" %>
+    <%= form.text_field :card_name %>
+  </div>
+
+  <div class="field mb-3">
+    <%= form.number_field :user_id, id: :card_user_id, value:current_user.id, style: "display: block", type: :hidden %>
+  </div>
+
+  <div class="field mb-3">
+    <%= form.label :collection_name, style: "display: block" %>
+    <%= form.text_field :collection_name %>
+  </div>
+
+<div class="field mb-3">
+  <%= form.label :description, style: "display: block" %>
+  <%= form.text_area :description %>
+</div>
+
+<div class="field mb-3">
+  <%= form.label :image,  style: "display: block" %>
+  <%= form.file_field :image, style: "font-size: 12px;" %>
+</div>
+
+  <div class="field mb-3">
+    <%= form.submit class:"btn btn-secondary btn-sm" %>
+  </div>
+<% end %>

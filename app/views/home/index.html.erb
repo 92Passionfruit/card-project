@@ -1,0 +1,27 @@
+<br>
+<h3>Welcome!</h3>
+<p>Create and collect your own unique trading cards with our easy-to-use platform. Whether you're a fan of sports, anime, or fantasy, our website allows you to design custom trading cards tailored to your interests.
+</p>
+
+    <div style="text-align: center;">
+        <%= image_tag 'lakecards.png', size: '480x250' %>
+        <%= image_tag 'alphabetcards.png', size: '320x250' %>
+    </div>
+
+    <br>
+
+    <p>Start creating your custom trading cards now and let the collecting begin!</p>
+    <br>
+    <br>
+
+    <% if user_signed_in? %>
+    <% else %>
+    <div style="text-align: center;">
+        <button type="button" class="btn btn-success"><%= link_to 'Sign Up', new_user_registration_path, class:"nav-link active" %></button>
+
+        <br>
+<br>
+        <p>Already have an account?</p>
+        <button type="button" class="btn btn-outline-success"><%= link_to 'Log In', new_user_session_path, class:"nav-link active" %></button>
+</div>
+<% end %>

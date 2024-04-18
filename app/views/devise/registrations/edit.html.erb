@@ -1,0 +1,76 @@
+<div style="max-width: 600px; margin-left: auto; margin-right: auto;">
+<h2>Edit Profile</h2>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field mb-3">
+    <% f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", placeholder:"email" %>
+  </div>
+
+  <div class="field mb-3">
+    <% f.label :current_password %><br />
+    <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control", placeholder:"current password" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field mb-3">
+    <% f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "new-password", class:"form-control", placeholder:"new password (#{@minimum_password_length} character minimum)" %>
+  </div>
+
+  <div class="field mb-3">
+    <% f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder:"confirm new password" %>
+  </div>
+  <p style="font-size: 10px;">Note: if you wish to update your email and not your password, leave both 'new password' fields blank.</p>
+
+  <div class="actions">
+    <%= f.submit "Update", class:"form-control btn btn-secondary" %>
+  </div>
+<% end %>
+
+<br>
+
+<%= link_to "Back", :back %>
+</div>
+<br>
+<br>
+<br>
+
+<div class="card", style="max-width: 300px; margin-left: auto; margin-right: auto;">
+  <div class="card-header"></div>
+  <div class="card-body">
+    <h5 class="card-title">I no longer wish to use this service.</h5>
+    <% if current_user.present? %>
+      <%= form_tag registration_path(resource_name), method: :delete, class: "cancel-form", data: { confirm: "Are you sure you want to cancel your account? This action cannot be undone." } do %>
+        <div class="field form-group" style="display: flex; align-items: flex-start;">
+          <%= check_box_tag :confirmation_checkbox, 1, false, class: "confirmation-checkbox", required: true %>
+          <div style="margin-left: 5px;">
+            <%= label_tag :confirmation_checkbox, "I understand that canceling my account will permanently delete all of my custom cards. <strong><em>This cannot be undone.</em></strong>".html_safe, style: "font-size: 12px;" %>
+          </div>
+        </div>
+        <br>
+        <%= submit_tag "Cancel my account", class: "form-control btn btn-danger", id: "cancelButton", disabled: true %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const checkbox = document.querySelector('.confirmation-checkbox');
+  const cancelButton = document.querySelector('.cancel-form input[type="submit"]');
+
+  checkbox.addEventListener('change', function() {
+    if (checkbox.checked) {
+      cancelButton.disabled = false;
+    } else {
+      cancelButton.disabled = true;
+    }
+  });
+});
+</script>

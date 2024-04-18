@@ -1,0 +1,33 @@
+<div id="<%= dom_id card %>">
+  <table class="table table-striped" >
+  <% if card.user == current_user %>
+  <thead>
+  <tr>
+    <th>Card:</th>
+    <th>Collection:</th>
+    <th>Description:</th>
+    <th>Image:</th>
+  </tr>
+</thead>
+<tbody>
+      <tr>
+        <td style="font-size: 14px;"><%= link_to card.card_name, card %></td>
+
+
+        <td style="font-size: 14px;"><%= card.collection_name %></td>
+
+        <td style="font-size: 12px;"><%= card.description %></td>
+
+        <td>
+          <% if card.image.attached? %>
+            <%= image_tag card.image, style: "max-width: 10rem; max-height: 10rem;"  %>
+          <% else %>
+            No image attached
+          <% end %>
+        </td>
+
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+</div>

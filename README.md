@@ -1,2 +1,2 @@
 # card-project
-custom card creation/collection (with use login/signup)
+custom card creation/collection (with user login/signup)
